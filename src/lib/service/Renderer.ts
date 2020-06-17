@@ -6,6 +6,7 @@ import { Container } from './Container';
 import { Settings } from '../../common/constants/Settings';
 import { QuerySelector } from '../../common/constants/QuerySelector';
 import { Graphics } from '../../common/constants/Graphics';
+import { Segment } from '../../common/classes/Segment';
 
 export class Renderer implements Provider {
   private snake: Snake;
@@ -28,6 +29,9 @@ export class Renderer implements Provider {
 
     const canvas: HTMLCanvasElement = document.querySelector(QuerySelector.Canvas);
     this.context = canvas.getContext('2d');
+
+    canvas.height = Graphics.BoardSize;
+    canvas.width = Graphics.BoardSize;
     canvas.style.backgroundColor = Graphics.CanvasColor;
   }
 
@@ -46,15 +50,30 @@ export class Renderer implements Provider {
     this.context.fillRect(0, 0, Graphics.BoardSize, Graphics.BoardSize);
   }
 
+  private drawSnakeSegment (segment: Segment) {
+    const borderWidth = (Math.floor(Graphics.SnakeSegmentSize * .1)) / 2;
+
+    // draw segment border
+    this.context.fillStyle = Graphics.CanvasColor;
+    this.context.fillRect(segment.getX(), segment.getY(), Graphics.SnakeSegmentSize, Graphics.SnakeSegmentSize);
+
+    // draw segment fill
+    this.context.fillStyle = segment.getColor();
+    this.context.fillRect(
+      segment.getX() + borderWidth,
+      segment.getY() + borderWidth,
+      Graphics.SnakeSegmentSize - (borderWidth * 2),
+      Graphics.SnakeSegmentSize - (borderWidth * 2)
+    );
+  }
+
   private drawSnake () {
     const segs = this.snake.getSegments();
-    segs.reduce((previousSegment, segment) => {
-      segment.move();
-      this.context.fillStyle = segment.getColor();
-      this.context.fillRect(segment.getX(), segment.getY(), Graphics.SnakeSegmentSize, Graphics.SnakeSegmentSize);
-      segment.setDirection(previousSegment.getDirection());
+    this.snake.moveSegments();
+    segs.forEach((segment, index) => {
+      this.drawSnakeSegment(segment);
       return segment;
-    }, segs[0]);
+    });
   }
 
   private drawCandy () {
@@ -82,7 +101,7 @@ export class Renderer implements Provider {
     }
 
     const delta = new Date().getTime() - this.renderStartTime;
-    if (delta >= Settings.GameSpeed) {
+    if (delta >= Settings.RenderInterval) {
       this.render();
       this.resetRenderStartTime();
     }

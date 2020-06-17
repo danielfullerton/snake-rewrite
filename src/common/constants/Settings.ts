@@ -1,3 +1,3 @@
 export class Settings {
-  static readonly GameSpeed = 100;
+  static readonly RenderInterval = 80;
 }

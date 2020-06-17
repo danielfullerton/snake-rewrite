@@ -1,9 +1,9 @@
-import { QuerySelector } from '../common/constants/QuerySelector';
-import { Service } from '../common/interfaces/Service';
+import { QuerySelector } from '../../common/constants/QuerySelector';
+import { Provider } from '../../common/interfaces/Provider';
 import { Game } from './Game';
 import { Container } from './Container';
 
-export class Keyboard implements Service {
+export class Keyboard implements Provider {
   private game: Game;
 
   constructor () {

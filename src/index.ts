@@ -1,3 +1,3 @@
 import './style.scss';
-import { Container } from './lib/Container';
+import { Container } from './lib/service/Container';
 Container.initialize();

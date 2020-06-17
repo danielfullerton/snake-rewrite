@@ -1,4 +1,4 @@
-export interface Service {
+export interface Provider {
   /*
   this method should be used to
   1.) Inject dependencies

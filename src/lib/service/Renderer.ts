@@ -1,13 +1,13 @@
-import { Service } from '../common/interfaces/Service';
-import { Snake } from './Snake';
+import { Provider } from '../../common/interfaces/Provider';
+import { Snake } from '../entity/Snake';
 import { Board } from './Board';
-import { Candy } from './Candy';
+import { Candy } from '../entity/Candy';
 import { Container } from './Container';
-import { Settings } from '../common/constants/Settings';
-import { QuerySelector } from '../common/constants/QuerySelector';
-import { Graphics } from '../common/constants/Graphics';
+import { Settings } from '../../common/constants/Settings';
+import { QuerySelector } from '../../common/constants/QuerySelector';
+import { Graphics } from '../../common/constants/Graphics';
 
-export class Renderer implements Service {
+export class Renderer implements Provider {
   private snake: Snake;
   private board: Board;
   private candy: Candy;
@@ -37,19 +37,19 @@ export class Renderer implements Service {
   private drawSnake () {
     const segs = this.snake.getSegments();
     segs.reduce((previousSegment, segment) => {
-      this.context.fillStyle = segment.color;
-      this.context.fillRect(segment.x, segment.y, Graphics.SnakeSegmentSize, Graphics.SnakeSegmentSize);
-      segment.dir = previousSegment.dir;
+      this.context.fillStyle = segment.getColor();
+      this.context.fillRect(segment.getX(), segment.getY(), Graphics.SnakeSegmentSize, Graphics.SnakeSegmentSize);
+      segment.setDirection(previousSegment.getDirection());
       return segment;
     }, segs[0]);
   }
 
   private drawCandy () {
-    this.context.fillStyle = this.candy.getColor();
+    this.context.fillStyle = this.candy.getPoint().getColor();
     this.context.beginPath();
     this.context.arc(
-      this.candy.getPosition().x + Graphics.CandyRadius,
-      this.candy.getPosition().y + Graphics.CandyRadius,
+      this.candy.getPoint().getX() + Graphics.CandyRadius,
+      this.candy.getPoint().getY() + Graphics.CandyRadius,
       Graphics.CandyRadius,
       0,
       Graphics.CandyAngle

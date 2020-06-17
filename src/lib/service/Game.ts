@@ -1,8 +1,8 @@
-import { Service } from '../common/interfaces/Service';
+import { Provider } from '../../common/interfaces/Provider';
 import { Renderer } from './Renderer';
 import { Container } from './Container';
 
-export class Game implements Service {
+export class Game implements Provider {
   private renderer: Renderer;
   private score: number;
 

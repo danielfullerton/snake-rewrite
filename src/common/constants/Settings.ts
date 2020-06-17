@@ -1,3 +1,3 @@
 export class Settings {
-  static readonly GameSpeed = 50;
+  static readonly GameSpeed = 100;
 }

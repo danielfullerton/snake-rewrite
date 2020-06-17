@@ -5,6 +5,7 @@ import { Container } from './Container';
 export class Game implements Provider {
   private renderer: Renderer;
   private score: number;
+  private running = false;
 
   init () {
     this.renderer = Container.Renderer;
@@ -13,12 +14,12 @@ export class Game implements Provider {
   }
 
   start () {
-    console.log('starting...');
     this.renderer.start();
+    this.running = true;
   }
 
   stop () {
-    console.log('stopped');
     this.renderer.stop();
+    this.running = false;
   }
 }

@@ -15,8 +15,10 @@ export abstract class DrawableVectorPoint extends DrawablePoint {
     return this.direction;
   }
 
-  setDirection(direction: Direction) {
-    this.direction = direction;
+  setDirection(direction: Direction, condition = true) {
+    if (condition) {
+      this.direction = direction;
+    }
   }
 
   abstract move(): void;

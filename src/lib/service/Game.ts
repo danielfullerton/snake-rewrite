@@ -8,6 +8,7 @@ export class Game implements Provider {
 
   init () {
     this.renderer = Container.Renderer;
+    this.renderer.init();
     this.score = 1;
   }
 

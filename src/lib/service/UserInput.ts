@@ -3,7 +3,7 @@ import { Provider } from '../../common/interfaces/Provider';
 import { Game } from './Game';
 import { Container } from './Container';
 
-export class Keyboard implements Provider {
+export class UserInput implements Provider {
   private game: Game;
 
   constructor () {
@@ -18,6 +18,7 @@ export class Keyboard implements Provider {
   private addStartButtonListener () {
     document.querySelector(QuerySelector.StartButton).addEventListener('click', evt => {
       this.game?.stop();
+      this.game.init();
       this.game?.start();
     });
   }

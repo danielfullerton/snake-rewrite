@@ -5,4 +5,5 @@ export class Graphics {
   static readonly CandyAngle = 2 * Math.PI;
   static readonly SnakeSegmentSize = 18;
   static readonly GridPositionSize = 20;
+  static readonly CanvasColor = '#000000';
 }

@@ -1,7 +1,7 @@
 import { Board as BoardService } from './Board';
 import { Candy as CandyEntity } from '../entity/Candy';
 import { Game as GameService } from './Game';
-import { Keyboard as KeyboardService } from './Keyboard';
+import { UserInput as UserInputService } from './UserInput';
 import { Renderer as RendererService } from './Renderer';
 import { Snake as SnakeEntity } from '../entity/Snake';
 import { Provider } from '../../common/interfaces/Provider';
@@ -13,7 +13,7 @@ export class Container {
   static readonly Board = Container.Factory<BoardService>('Board', BoardService);
   static readonly Candy = Container.Factory<CandyEntity>('Candy', CandyEntity);
   static readonly Game = Container.Factory<GameService>('Game', GameService);
-  static readonly Keyboard = Container.Factory<KeyboardService>('Keyboard', KeyboardService);
+  static readonly UserInput = Container.Factory<UserInputService>('UserInput', UserInputService);
   static readonly Renderer = Container.Factory<RendererService>('Renderer', RendererService);
   static readonly Snake = Container.Factory<SnakeEntity>('Snake', SnakeEntity);
 

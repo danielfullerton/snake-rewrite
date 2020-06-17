@@ -21,7 +21,14 @@ export class Renderer implements Provider {
     this.snake = Container.Snake;
     this.board = Container.Board;
     this.candy = Container.Candy;
-    this.context = (document.querySelector(QuerySelector.Canvas) as HTMLCanvasElement).getContext('2d');
+
+    this.snake.init();
+    this.board.init();
+    this.candy.init();
+
+    const canvas: HTMLCanvasElement = document.querySelector(QuerySelector.Canvas);
+    this.context = canvas.getContext('2d');
+    canvas.style.backgroundColor = Graphics.CanvasColor;
   }
 
   start () {
@@ -34,9 +41,15 @@ export class Renderer implements Provider {
     this.renderStartTime = new Date().getTime();
   }
 
+  private clearFrame () {
+    this.context.fillStyle = Graphics.CanvasColor;
+    this.context.fillRect(0, 0, Graphics.BoardSize, Graphics.BoardSize);
+  }
+
   private drawSnake () {
     const segs = this.snake.getSegments();
     segs.reduce((previousSegment, segment) => {
+      segment.move();
       this.context.fillStyle = segment.getColor();
       this.context.fillRect(segment.getX(), segment.getY(), Graphics.SnakeSegmentSize, Graphics.SnakeSegmentSize);
       segment.setDirection(previousSegment.getDirection());
@@ -58,6 +71,7 @@ export class Renderer implements Provider {
   }
 
   private render () {
+    this.clearFrame();
     this.drawSnake();
     this.drawCandy();
   }

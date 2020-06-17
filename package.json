@@ -22,7 +22,6 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
-    "randomcolor": "^0.5.4",
-    "redom": "^3.26.0"
+    "randomcolor": "^0.5.4"
   }
 }

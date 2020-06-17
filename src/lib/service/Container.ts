@@ -1,4 +1,3 @@
-import { Board as BoardService } from './Board';
 import { Candy as CandyEntity } from '../entity/Candy';
 import { Game as GameService } from './Game';
 import { UserInput as UserInputService } from './UserInput';
@@ -10,7 +9,6 @@ import { Provider } from '../../common/interfaces/Provider';
 export class Container {
   private static Providers: { [key: string]: Provider } = {};
 
-  static readonly Board = Container.Factory<BoardService>('Board', BoardService);
   static readonly Candy = Container.Factory<CandyEntity>('Candy', CandyEntity);
   static readonly Game = Container.Factory<GameService>('Game', GameService);
   static readonly UserInput = Container.Factory<UserInputService>('UserInput', UserInputService);

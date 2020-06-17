@@ -1,6 +1,5 @@
 import { Provider } from '../../common/interfaces/Provider';
 import { Snake } from '../entity/Snake';
-import { Board } from './Board';
 import { Candy } from '../entity/Candy';
 import { Container } from './Container';
 import { Settings } from '../../common/constants/Settings';
@@ -10,7 +9,6 @@ import { Segment } from '../../common/classes/Segment';
 
 export class Renderer implements Provider {
   private snake: Snake;
-  private board: Board;
   private candy: Candy;
   private context: CanvasRenderingContext2D;
 
@@ -20,11 +18,9 @@ export class Renderer implements Provider {
 
   init () {
     this.snake = Container.Snake;
-    this.board = Container.Board;
     this.candy = Container.Candy;
 
     this.snake.init();
-    this.board.init();
     this.candy.init();
 
     const canvas: HTMLCanvasElement = document.querySelector(QuerySelector.Canvas);
